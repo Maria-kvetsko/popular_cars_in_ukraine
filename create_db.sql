@@ -1,3 +1,9 @@
+-- Завдання 
+--Cтворити таблиці в які в подальшому можна буде підтягнути дані з файлу csv
+
+
+
+--Створення таблиці для даних з ТСЦ про реєстрацію машин
 CREATE TABLE data_cars_temp (
   person TEXT,
   reg_addr_koatuu TEXT,
@@ -20,6 +26,8 @@ CREATE TABLE data_cars_temp (
   total_weight TEXT,
   registration_number TEXT
 );
+
+-- Створення таблиці для даних назв та адрес ТСЦ 
 CREATE TABLE tsc_adres(
 tsc text,
 adres_tsc text

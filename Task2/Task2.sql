@@ -30,7 +30,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Створення функції яка повертає список всіх червоних фабій по обласі
-CREATE OR REPLACE FUNCTION get_fabia_in_region(region_name varchar)
+CREATE OR REPLACE FUNCTION get_red_fabia_list_by_region(region_name varchar)
 RETURNS table (model text, brand text, color text, adres text)  AS $$
 BEGIN
 	RETURN QUERY
@@ -47,30 +47,22 @@ $$ LANGUAGE plpgsql;
 
 
 --Виклик функціїї що повертає список всіх червоних фабій по області
-SELECT get_fabia_in_region('Львів');
+SELECT get_red_fabia_list_by_region('Львівська');
 
 
 
 --Створення функції що повертає кількість червоних фабій по області числом
-CREATE OR REPLACE FUNCTION get_red_fabia_in_region(region_name varchar)
+CREATE OR REPLACE FUNCTION get_count_red_fabia_by_region(region_name varchar)
 RETURNS integer AS $$
 DECLARE
     red_fabia_count integer;
 BEGIN
     SELECT COUNT(*) INTO red_fabia_count
-    FROM data_cars_temp
-    LEFT JOIN tsc_adres ON data_cars_temp.dep = tsc_adres.number_tsc
-    WHERE brand = 'SKODA'
-      AND model = 'FABIA'
-      AND color = 'ЧЕРВОНИЙ'
-      AND dep = ANY(dep_tsc_number(region_name));
-
-    RETURN red_fabia_count;
+	from get_red_fabia_list_by_region(region_name);
+	RETURN red_fabia_count;
 END;
 $$ LANGUAGE plpgsql;
 
-
-
 --Виклик функціїї що повертає кількість червоних фабій по області числом
-SELECT get_red_fabia_in_region('Львівська');
+SELECT get_count_red_fabia_by_region('Львівська');
 

@@ -4,7 +4,7 @@
 --Зробити функцію яка повертає список червоних фабій по області
 
 
---Створення функції для хбереження даних ТСЦ в масив по областях
+--Створення функції для збереження даних ТСЦ в масив по областях
 create or replace function dep_tsc_number(region_name varchar)
 returns text[] AS $$
 declare number_tsc_adres text[];

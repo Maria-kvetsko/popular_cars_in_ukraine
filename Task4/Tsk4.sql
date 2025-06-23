@@ -10,5 +10,5 @@ $$
 
 CALL transform_to_red_fabia_in_number('КА5010НС')
 
-select * from data_cars_temp
+select brand, model, color, registration_number from data_cars_temp
 where registration_number = 'КА5010НС'
